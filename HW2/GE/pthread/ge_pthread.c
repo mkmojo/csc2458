@@ -18,9 +18,7 @@
 typedef struct 
 {
     int nsize;
-    int iteration;
-    int begin;
-    int end;
+    int task_id;
 }thread_arg;
 
 int task_num;
@@ -31,6 +29,25 @@ double **matrix, *X, *R;
 
 double *X__;
 
+/* Barrier for synchronization */
+pthread_mutex_t mut = PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
+void barrier (int expect)
+{
+    static int arrived = 0;
+
+    pthread_mutex_lock (&mut);	//lock
+
+    arrived++;
+    if (arrived < expect)
+        pthread_cond_wait (&cond, &mut);
+    else {
+        arrived = 0;		// reset the barrier before broadcast is important
+        pthread_cond_broadcast (&cond);
+    }
+
+    pthread_mutex_unlock (&mut);	//unlock
+}
 /* Initialize the matirx. */
 
 int initMatrix(const char *fname)
@@ -161,104 +178,96 @@ void errexit (const char *err_str)
     exit (1);
 }
 
-void *work_thread(void *arg)
+
+void set_message(thread_arg *message, int nsize, int ii)
 {
-    thread_arg message =  *((thread_arg *) arg); 
-    int j, k;
-    int i = message.iteration;
-    int begin = message.begin;
-    int end = message.end;
-    int nsize = message.nsize;
-    double pivotval;
-    //printf("thread with id %d\n",task_id);
-       
-    for( j = begin; j <= end; j++){
-    pivotval = matrix[j][i];
-    matrix[j][i] = 0.0;
-    for( k = i + 1; k < nsize; k++){
-        matrix[j][k] -= pivotval * matrix[i][k];
-    }
-    R[j] -= pivotval * R[i];
-    } 
+    message->nsize = nsize;
+    message->task_id = ii + 1;
 }
 
-void set_message(thread_arg *message, int nsize, int cnt_row, int ii)
+int set_begin(int nsize, int cnt_row, int task_id)
 {
-    int task_id = ii + 1;
+    int i = cnt_row;
+    /* Factorize the rest of the matrix. */
     //rows that need to be dealt with, starting from (i + 1)_th. 
     //because i_th has been normalized. 
-    int total_num_row = nsize-cnt_row-1; 
+    int total_num_row = nsize-i-1; 
     
     //make sure that all row will be covered
     int section_num_row = (total_num_row - 1) / task_num + 1; 
 
     //task_id is 1 based index. 
-    int begin = (cnt_row + 1) + (task_id - 1) * section_num_row;
+    int begin = (i + 1) + (task_id - 1) * section_num_row;
+    //printf("task_id %d, nsize %d, i %d, total_num_row %d, 
+    //section_num_row %d, begin %d end %d\n",task_id, nsize, i,
+    //total_num_row, section_num_row, begin, end);
+    return begin;
+}
+
+int set_end(int nsize, int cnt_row, int task_id)
+{
+    int i = cnt_row;
+    /* Factorize the rest of the matrix. */
+    //rows that need to be dealt with, starting from (i + 1)_th. 
+    //because i_th has been normalized. 
+    int total_num_row = nsize-i-1; 
+    
+    //make sure that all row will be covered
+    int section_num_row = (total_num_row - 1) / task_num + 1; 
+
+    //task_id is 1 based index. 
+    int begin = (i + 1) + (task_id - 1) * section_num_row;
     int end   = begin + section_num_row - 1; 
     if(end >= nsize)
         end = nsize - 1;
-    //printf("task_id %d, nsize %d, i %d, total_num_row %d, section_num_row %d, begin %d end %d\n",task_id, nsize, i,  total_num_row, section_num_row, begin, end);
-    message->nsize = nsize;
-    message->iteration = cnt_row;
-    message->begin = begin;
-    message->end = end;
+    //printf("task_id %d, nsize %d, i %d, total_num_row %d, 
+    //section_num_row %d, begin %d end %d\n",task_id, nsize, i,
+    //total_num_row, section_num_row, begin, end);
+    return end;
 }
 /* For all the rows, get the pivot and eliminate all rows and columns
  * for that particular pivot row. */
 
-void computeGauss(int nsize)
+void *computeGauss_row_version(void *arg)
 {
-    int i, j, k, ii;
+    thread_arg *message = (thread_arg *) arg;
+    int i, j, k, nsize, task_id, begin, end;
     double pivotval;
-    thread_arg *message; 
     pthread_attr_t attr;
     pthread_t *tid; 
 
-    message = (thread_arg *) malloc(sizeof(thread_arg)*task_num);
-    tid = (pthread_t *) malloc(sizeof(pthread_t) * task_num);
-    if(!message || !tid)
-        errexit("out of shared memory");
-    pthread_attr_init(&attr);
-    pthread_attr_setscope(&attr, PTHREAD_SCOPE_SYSTEM);
-
+    task_id = message->task_id;
+    nsize = message->nsize;
     for (i = 0; i < nsize; i++) {
-        getPivot(nsize,i);
+        if(task_id == 1){
+            getPivot(nsize,i);
 
-        /* Scale the main row. */
-        pivotval = matrix[i][i];
-        if (pivotval != 1.0) {
-            matrix[i][i] = 1.0;
-            for (j = i + 1; j < nsize; j++) {
-                matrix[i][j] /= pivotval; 
+            /* Scale the main row. */
+            pivotval = matrix[i][i];
+            if (pivotval != 1.0) {
+                matrix[i][i] = 1.0;
+                for (j = i + 1; j < nsize; j++) {
+                    matrix[i][j] /= pivotval; 
+                }
+                R[i] /= pivotval;
             }
-            R[i] /= pivotval;
+            barrier(task_num);
         }
-            
-        /* Factorize the rest of the matrix. 
-        for (j = i + 1; j < nsize; j++) {
+        else
+            barrier(task_num);
+
+
+       begin = set_begin(nsize, i, task_id);
+       end = set_end(nsize, i, task_id);
+       for (j = begin; j <= end; j++) {
             pivotval = matrix[j][i];
             matrix[j][i] = 0.0;
             for (k = i + 1; k < nsize; k++) {
                 matrix[j][k] -= pivotval * matrix[i][k];
             }
             R[j] -= pivotval * R[i];
-        }*/
-        
-        /* Factorize the rest of the matrix. 
-           row division version */ 
-        for( ii = 0; ii < task_num; ii++){
-            set_message(&message[ii],nsize,i,ii);
-            pthread_create(&tid[ii], &attr, work_thread, &message[ii]);
         }
-
-        /* Factorize the rest of the matrix. 
-           col division version */
-
-
-        //wait for all thread to finish
-        for( ii = 0; ii < task_num; ii++){
-            pthread_join(tid[ii], NULL);
-        }
+        barrier(task_num);
     }
 }
 
@@ -285,30 +294,16 @@ void solveGauss(int nsize)
 #endif
 }
 
-pthread_mutex_t mut = PTHREAD_MUTEX_INITIALIZER;
-pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
-void barrier (int expect)
-{
-    static int arrived = 0;
 
-    pthread_mutex_lock (&mut);	//lock
-
-    arrived++;
-    if (arrived < expect)
-        pthread_cond_wait (&cond, &mut);
-    else {
-        arrived = 0;		// reset the barrier before broadcast is important
-        pthread_cond_broadcast (&cond);
-    }
-
-    pthread_mutex_unlock (&mut);	//unlock
-}
 
 int main(int argc, char *argv[])
 {
-    int c, i;
+    int c, i, ii;
     int nsize = 0;
     double error;
+    pthread_attr_t attr;
+    thread_arg *messages;
+    pthread_t *tid;
     char fname[1024];
     strcpy(fname,argv[1]);
 
@@ -326,8 +321,27 @@ int main(int argc, char *argv[])
     initRHS(nsize);
     initResult(nsize);
 
+    //start timer
     gettimeofday(&start, 0);
-    computeGauss(nsize);
+
+    pthread_attr_init(&attr);
+    pthread_attr_setscope(&attr, PTHREAD_SCOPE_SYSTEM);
+
+    messages = (thread_arg *) malloc(sizeof(thread_arg)*task_num);
+    tid = (pthread_t *) malloc(sizeof(pthread_t) * task_num);
+    if(!messages || !tid)
+        errexit("out of shared memory");
+
+    for( ii = 0; ii < task_num; ii++){
+        set_message(&messages[ii],nsize,ii);
+        pthread_create(&tid[ii], &attr, computeGauss_row_version, &messages[ii]);
+    }
+    
+    //wait for all thread to finish
+    for( ii = 0; ii < task_num; ii++){
+        pthread_join(tid[ii], NULL);
+    }
+    //end timer
     gettimeofday(&finish, 0);
 
     solveGauss(nsize);
