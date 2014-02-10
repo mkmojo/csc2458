@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2013)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: pregel.aux
+The style file: plain.bst
+Database file #1: pregel_citation.bib
+Warning--empty journal in pregel_ori
+You've used 1 entry,
+            2118 wiz_defined-function locations,
+            504 strings with 4291 characters,
+and the built_in function-call counts, 598 in all, are:
+= -- 56
+> -- 38
+< -- 1
++ -- 15
+- -- 14
+* -- 46
+:= -- 99
+add.period$ -- 3
+call.type$ -- 1
+change.case$ -- 10
+chr.to.int$ -- 0
+cite$ -- 2
+duplicate$ -- 20
+empty$ -- 33
+format.name$ -- 14
+if$ -- 122
+int.to.chr$ -- 0
+int.to.str$ -- 1
+missing$ -- 1
+newline$ -- 8
+num.names$ -- 2
+pop$ -- 12
+preamble$ -- 1
+purify$ -- 9
+quote$ -- 0
+skip$ -- 19
+stack$ -- 0
+substring$ -- 37
+swap$ -- 9
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 4
+warning$ -- 1
+while$ -- 5
+width$ -- 2
+write$ -- 12
+(There was 1 warning)

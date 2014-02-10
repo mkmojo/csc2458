@@ -1,0 +1,9 @@
+\begin{thebibliography}{1}
+
+\bibitem{pregel_ori}
+Grzegorz Malewicz, Matthew~H Austern, Aart~JC Bik, James~C Dehnert, Ilan Horn,
+  Naty Leiser, and Grzegorz Czajkowski.
+\newblock Pregel: a system for large-scale graph processing.
+\newblock pages 135--146, 2010.
+
+\end{thebibliography}

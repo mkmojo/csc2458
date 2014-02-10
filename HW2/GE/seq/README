@@ -1,0 +1,16 @@
+The program takes one parameter as the input matrix.  
+
+Six matrices (extracted from real-world problems) are available 
+for your testing:
+    /u/kshen/matrices/original/jpwh_991.dat	(size:   991)
+    /u/kshen/matrices/original/orsreg_1.dat     (size:  2205)
+    /u/kshen/matrices/original/sherman5.dat	(size:  3312)
+    /u/kshen/matrices/original/saylr4.dat	(size:  3564)
+    /u/kshen/matrices/original/sherman3.dat	(size:  5005)
+    /u/kshen/matrices/original/memplus.dat      (size: 17758)
+However, I believe memplus.dat is too large so you probably
+shouldn't try.
+
+An additional artificially generated dense matrix is also availble
+for your testing:
+    /u/cs458/apps/gauss/seq/matrices_dense/matrix_2000.dat

@@ -1,0 +1,263 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=latex 2013.10.31)  27 JAN 2014 21:55
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**bare_conf-copy.tex
+(./bare_conf-copy.tex
+LaTeX2e <2011/06/27>
+Babel <3.9f> and hyphenation patterns for 3 languages loaded.
+(./IEEEtran.cls
+Document Class: IEEEtran 2012/12/27 V1.8 by Michael Shell
+-- See the "IEEEtran_HOWTO" manual for usage information.
+-- http://www.michaelshell.org/tex/ieeetran/
+\@IEEEtrantmpdimenA=\dimen102
+\@IEEEtrantmpdimenB=\dimen103
+\@IEEEtrantmpcountA=\count79
+\@IEEEtrantmpcountB=\count80
+\@IEEEtrantmptoksA=\toks14
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 368.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+-- Using 8.5in x 11in (letter) paper.
+-- Using DVI output.
+\@IEEEnormalsizeunitybaselineskip=\dimen104
+-- This is a 10 point document.
+\CLASSINFOnormalsizebaselineskip=\dimen105
+\CLASSINFOnormalsizeunitybaselineskip=\dimen106
+\IEEEnormaljot=\dimen107
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 726.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 726.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 726.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 726.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 726.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 726.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 726.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 726.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 726.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 726.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <11> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 726.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <11> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 726.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 726.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 726.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 726.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <17> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 726.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 726.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <20> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 726.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <24> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 726.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <24> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 726.
+\IEEEilabelindentA=\dimen108
+\IEEEilabelindentB=\dimen109
+\IEEEilabelindent=\dimen110
+\IEEEelabelindent=\dimen111
+\IEEEdlabelindent=\dimen112
+\IEEElabelindent=\dimen113
+\IEEEiednormlabelsep=\dimen114
+\IEEEiedmathlabelsep=\dimen115
+\IEEEiedtopsep=\skip41
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@IEEEsubequation=\count85
+\abovecaptionskip=\skip42
+\belowcaptionskip=\skip43
+\c@figure=\count86
+\c@table=\count87
+\@IEEEeqnnumcols=\count88
+\@IEEEeqncolcnt=\count89
+\@IEEEsubeqnnumrollback=\count90
+\@IEEEtmpitemindent=\dimen116
+\c@IEEEbiography=\count91
+\@IEEEtranrubishbin=\box26
+) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks15
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: dvips.def on input line 91.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/dvips.def
+File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+))
+\Gin@req@height=\dimen117
+\Gin@req@width=\dimen118
+)
+(/usr/share/texlive/texmf-dist/tex/latex/wrapfig/wrapfig.sty
+\wrapoverhang=\dimen119
+\WF@size=\dimen120
+\c@WF@wrappedlines=\count92
+\WF@box=\box27
+\WF@everypar=\toks16
+Package: wrapfig 2003/01/31  v 3.6
+)
+(/usr/share/texlive/texmf-dist/tex/latex/layouts/layouts.sty
+Package: layouts 2009/09/02 v2.6d graphical depiction of document elements
+\l@ylen=\skip44
+\layoutsbox=\box28
+\l@youtunitlength=\skip45
+\l@youtlinethick=\skip46
+\l@youtlinethickii=\skip47
+\l@ysetupparskip=\skip48
+\l@ysetupbaselineskip=\skip49
+\l@yonem=\skip50
+\l@yonex=\skip51
+\l@ylmarg=\skip52
+\l@yrmarg=\skip53
+\l@yitmindent=\skip54
+\l@ylblwidth=\skip55
+\l@ylblsep=\skip56
+\l@ylparindent=\skip57
+\l@ytsep=\skip58
+\l@ypskip=\skip59
+\l@yptsep=\skip60
+\l@ypsep=\skip61
+\l@yitmsep=\skip62
+\l@ytok=\toks17
+\l@youtpw=\count93
+\l@youtph=\count94
+\l@youthpi=\count95
+\l@youthpii=\count96
+\l@youthpiii=\count97
+\l@youthpiv=\count98
+\l@youthpv=\count99
+\l@youthpvi=\count100
+\l@youthpvii=\count101
+\l@youtparskip=\count102
+\l@youtvpi=\count103
+\l@youtvpii=\count104
+\l@youtvpiii=\count105
+\l@youtvpiv=\count106
+\l@youtvpv=\count107
+\l@youtvpvi=\count108
+\l@youtvpvii=\count109
+\l@youthdo=\count110
+\l@youthdi=\count111
+\l@youthdii=\count112
+\l@youthdiii=\count113
+\l@youthdiv=\count114
+\l@youthdv=\count115
+\l@youthdvi=\count116
+\l@youthdvii=\count117
+\l@youtvdo=\count118
+\l@youtvdi=\count119
+\l@youtvdii=\count120
+\l@youtvdiii=\count121
+\l@youtvdiv=\count122
+\l@youtvdv=\count123
+\l@youtvdvi=\count124
+\l@youtvdvii=\count125
+\l@youtvdviii=\count126
+\l@youtxci=\count127
+\l@youtxcii=\count128
+\l@youtxciii=\count129
+\l@youtxciv=\count130
+\l@youtxcv=\count131
+\l@youtxcvi=\count132
+\l@youtyci=\count133
+\l@youtycii=\count134
+\l@youtyciii=\count135
+\l@youtyciv=\count136
+\l@youtycv=\count137
+\l@youtycvi=\count138
+\l@youtycvii=\count139
+\l@youtycviii=\count140
+\l@youtxco=\count141
+\l@youtyco=\count142
+\l@ytempdima=\skip63
+\stockwidth=\skip64
+\stockheight=\skip65
+\trimedge=\skip66
+\trimtop=\skip67
+\uppermargin=\skip68
+\spinemargin=\skip69
+)
+(./bare_conf-copy.aux)
+\openout1 = `bare_conf-copy.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 280.
+LaTeX Font Info:    ... okay on input line 280.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 280.
+LaTeX Font Info:    ... okay on input line 280.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 280.
+LaTeX Font Info:    ... okay on input line 280.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 280.
+LaTeX Font Info:    ... okay on input line 280.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 280.
+LaTeX Font Info:    ... okay on input line 280.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 280.
+LaTeX Font Info:    ... okay on input line 280.
+
+
+Package layouts Warning: Layout scale set to 0.5 on input line 280.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 355.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 355.
+
+LaTeX Warning: Citation `pregel_ori' on page 1 undefined on input line 375.
+
+File: pic/vertex_state_machine.ps Graphic file (type eps)
+<pic/vertex_state_machine.ps> [1
+
+
+] (./bare_conf-copy.bbl)
+
+** Conference Paper **
+Before submitting the final camera ready copy, remember to:
+
+ 1. Manually equalize the lengths of two columns on the last page
+ of your paper;
+
+ 2. Ensure that any PostScript and/or PDF output post-processing
+ uses only Type 1 fonts and that every step in the generation
+ process uses the appropriate paper size.
+
+[2] (./bare_conf-copy.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 1561 strings out of 495001
+ 24373 string characters out of 6180851
+ 98819 words of memory out of 5000000
+ 4816 multiletter control sequences out of 15000+600000
+ 25356 words of font info for 55 fonts, out of 8000000 for 9000
+ 37 hyphenation exceptions out of 8191
+ 26i,8n,19p,615b,240s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on bare_conf-copy.dvi (2 pages, 14072 bytes).
