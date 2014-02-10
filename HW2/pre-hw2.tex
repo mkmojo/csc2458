@@ -1,0 +1,24 @@
+\documentclass{article}
+\usepackage{gnuplottex}
+
+
+\begin{document}
+\begin{gnuplot}[terminal=epslatex,scale=0.5]
+set logscale x 2
+set style data linespoints
+plot 'data.dat' using 1:2 title '$SOR$',\
+     'data.dat' using 1:3 title '$SOR^*$'
+\end{gnuplot}
+
+\begin{gnuplot}[terminal=epslatex,scale=0.5]
+set title "My Histo"
+unset logscale x
+set auto x
+# set yrange [0:300000]
+set style data histogram
+set style histogram cluster gap 1
+set style fill pattern border -1
+set boxwidth 0.9
+plot 'histo.dat' using 2:xtic(1) ti col, '' u 3 ti col
+\end{gnuplot}
+\end{document}
