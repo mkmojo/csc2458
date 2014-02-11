@@ -225,6 +225,7 @@ int set_end(int nsize, int cnt_row, int task_id)
     //total_num_row, section_num_row, begin, end);
     return end;
 }
+
 /* For all the rows, get the pivot and eliminate all rows and columns
  * for that particular pivot row. */
 
@@ -271,6 +272,51 @@ void *computeGauss_row_version(void *arg)
     }
 }
 
+/* For all the rows, get the pivot and eliminate all rows and columns
+ * for that particular pivot row. */
+void *computeGauss_col_version(void *arg)
+{
+    thread_arg *message = (thread_arg *) arg;
+    int i, j, k, nsize, task_id, begin, end;
+    double pivotval;
+    pthread_attr_t attr;
+    pthread_t *tid; 
+
+    task_id = message->task_id;
+    nsize = message->nsize;
+    for (i = 0; i < nsize; i++) {
+        if(task_id == 1){
+            getPivot(nsize,i);
+
+            /* Scale the main row. */
+            pivotval = matrix[i][i];
+            if (pivotval != 1.0) {
+                matrix[i][i] = 1.0;
+                for (j = i + 1; j < nsize; j++) {
+                    matrix[i][j] /= pivotval; 
+                }
+                R[i] /= pivotval;
+            }
+            barrier(task_num);
+        }
+        else
+            barrier(task_num);
+
+       begin = set_begin(nsize, i, task_id);
+       end = set_end(nsize, i, task_id);
+       for (j = i+1; j < nsize; j++) {
+            pivotval = matrix[j][i];
+            matrix[j][i] = 0.0;
+            for (k = begin; k <= end; k++) {
+                matrix[j][k] -= pivotval * matrix[i][k];
+            }
+            if(task_id == 1)
+                R[j] -= pivotval * R[i];
+        }
+
+        barrier(task_num);
+    }
+}
 /* Solve the equation. */
 
 void solveGauss(int nsize)
