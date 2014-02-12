@@ -1,8 +1,8 @@
 /*
  * A Red-Black SOR
  *
- *	using separate red and black matrices
- *	to minimize false sharing
+ *  using separate red and black matrices
+ *  to minimize false sharing
  *
  * Solves a M+2 by 2N+2 array
  *
@@ -26,7 +26,7 @@
  *
  */
 #ifndef _REENTRANT
-#define _REENTRANT		/* basic 3-lines for threads */
+#define _REENTRANT      /* basic 3-lines for threads */
 #endif
 #include <pthread.h>
 //#include <thread.h>
@@ -53,8 +53,8 @@ int M = 4000;
 int N = 500;
 int verify = 1;
 /*
-#define M	4000
-#define	N	 254
+#define M   4000
+#define N    254
 */
 
 float **red_;
@@ -68,17 +68,17 @@ barrier (int expect)
 {
     static int arrived = 0;
 
-    pthread_mutex_lock (&mut);	//lock
+    pthread_mutex_lock (&mut);  //lock
 
     arrived++;
     if (arrived < expect)
         pthread_cond_wait (&cond, &mut);
     else {
-        arrived = 0;		// reset the barrier before broadcast is important
+        arrived = 0;        // reset the barrier before broadcast is important
         pthread_cond_broadcast (&cond);
     }
 
-    pthread_mutex_unlock (&mut);	//unlock
+    pthread_mutex_unlock (&mut);    //unlock
 }
 
 /*
@@ -118,16 +118,16 @@ sor_odd (begin, end, task_id)
 
             for (k = 0; k < N; k++) {
 
-	        black_[j][k] = (red_[j - 1][k] + red_[j + 1][k] + red_[j][k] + red_[j][k + 1]) / 4.0;
+            black_[j][k] = (red_[j - 1][k] + red_[j + 1][k] + red_[j][k] + red_[j][k + 1]) / 4.0;
             }
             if ((j += 1) > end)
-	        break;
+            break;
 
             /* update black cells on even rows */
 
-	    for (k = 1; k <= N; k++) {
+        for (k = 1; k <= N; k++) {
 
-	        black_[j][k] = (red_[j - 1][k] + red_[j + 1][k] + red_[j][k - 1] + red_[j][k]) / 4.0;
+            black_[j][k] = (red_[j - 1][k] + red_[j + 1][k] + red_[j][k - 1] + red_[j][k]) / 4.0;
             }
         }
 
@@ -139,22 +139,22 @@ sor_odd (begin, end, task_id)
 
             for (k = 1; k <= N; k++) {
 
-	        red_[j][k] = (black_[j - 1][k] + black_[j + 1][k] + black_[j][k - 1] + black_[j][k]) / 4.0;
+            red_[j][k] = (black_[j - 1][k] + black_[j + 1][k] + black_[j][k - 1] + black_[j][k]) / 4.0;
             }
             if ((j += 1) > end)
-	        break;
+            break;
 
             /* update red cells on even rows */
 
             for (k = 0; k < N; k++) {
 
-	        red_[j][k] = (black_[j - 1][k] + black_[j + 1][k] + black_[j][k] + black_[j][k + 1]) / 4.0;
+            red_[j][k] = (black_[j - 1][k] + black_[j + 1][k] + black_[j][k] + black_[j][k + 1]) / 4.0;
             }
         }
 
         barrier (task_num);
 
-#ifdef	RESET_AFTER_ONE_ITERATION
+#ifdef  RESET_AFTER_ONE_ITERATION
         if ((i == 0) && (task_id == 0)){
             puts ("restart");
             gettimeofday (&start, NULL);
@@ -164,8 +164,8 @@ sor_odd (begin, end, task_id)
 #ifdef TIME_EACH_ITERATION
         gettimeofday (&sfinish, NULL);
         printf ("One Iteration Elapsed time: %.2f seconds\n",
-	        (((sfinish.tv_sec * 1000000.0) + sfinish.tv_usec) -
-	        ((sstart.tv_sec * 1000000.0) + sstart.tv_usec)) / 1000000.0);
+            (((sfinish.tv_sec * 1000000.0) + sfinish.tv_usec) -
+            ((sstart.tv_sec * 1000000.0) + sstart.tv_usec)) / 1000000.0);
 #endif
     }
 }
@@ -187,14 +187,14 @@ sor_even (begin, end, task_id)
 
             for (k = 1; k <= N; k++) {
 
-        	black_[j][k] = (red_[j - 1][k] + red_[j + 1][k] + red_[j][k - 1] + red_[j][k]) / 4.0;
+            black_[j][k] = (red_[j - 1][k] + red_[j + 1][k] + red_[j][k - 1] + red_[j][k]) / 4.0;
             }
             if ((j += 1) > end)
-	        break;
+            break;
 
             for (k = 0; k < N; k++) {
 
-	        black_[j][k] = (red_[j - 1][k] + red_[j + 1][k] + red_[j][k] + red_[j][k + 1]) / 4.0;
+            black_[j][k] = (red_[j - 1][k] + red_[j + 1][k] + red_[j][k] + red_[j][k + 1]) / 4.0;
             }
         }
         barrier (task_num);
@@ -203,18 +203,18 @@ sor_even (begin, end, task_id)
 
             for (k = 0; k < N; k++) {
 
-	        red_[j][k] = (black_[j - 1][k] + black_[j + 1][k] + black_[j][k] + black_[j][k + 1]) / 4.0;
+            red_[j][k] = (black_[j - 1][k] + black_[j + 1][k] + black_[j][k] + black_[j][k + 1]) / 4.0;
             }
             if ((j += 1) > end)
-        	break;
+            break;
 
             for (k = 1; k <= N; k++) {
 
-	        red_[j][k] = (black_[j - 1][k] + black_[j + 1][k] + black_[j][k - 1] + black_[j][k]) / 4.0;
+            red_[j][k] = (black_[j - 1][k] + black_[j + 1][k] + black_[j][k - 1] + black_[j][k]) / 4.0;
             }
         }
         barrier (task_num);
-#ifdef	RESET_AFTER_ONE_ITERATION
+#ifdef  RESET_AFTER_ONE_ITERATION
         if ((i == 0) && (task_id == 0)){
             gettimeofday (&start, NULL);
         }
@@ -260,8 +260,8 @@ work_thread (void *lp)
 
     if(task_id==0)
         printf ("Elapsed time: %.2f seconds\n",
-	        (((finish.tv_sec * 1000000.0) + finish.tv_usec) -
-	        ((start.tv_sec * 1000000.0) + start.tv_usec)) / 1000000.0);
+            (((finish.tv_sec * 1000000.0) + finish.tv_usec) -
+            ((start.tv_sec * 1000000.0) + start.tv_usec)) / 1000000.0);
 }
 
 int
@@ -339,18 +339,17 @@ main (argc, argv)
         res = fopen ("vres", "w");
         for (i = 0; i < M + 2; i++) {
             if (i & 1)
-	        for (j = 0; j < N + 1; j++) {
-	            fprintf (res, "[%d][%d] = %f\n", i, 2 * j, red_[i][j]);
-	            fprintf (res, "[%d][%d] = %f\n", i, 2 * j + 1, black_[i][j]);
-	        }
+            for (j = 0; j < N + 1; j++) {
+                fprintf (res, "[%d][%d] = %f\n", i, 2 * j, red_[i][j]);
+                fprintf (res, "[%d][%d] = %f\n", i, 2 * j + 1, black_[i][j]);
+            }
            else
-	       for (j = 0; j < N + 1; j++) {
-	           fprintf (res, "[%d][%d] = %f\n", i, 2 * j, black_[i][j]);
-	           fprintf (res, "[%d][%d] = %f\n", i, 2 * j + 1, red_[i][j]);
-	       }
-        }				/* for i */
+           for (j = 0; j < N + 1; j++) {
+               fprintf (res, "[%d][%d] = %f\n", i, 2 * j, black_[i][j]);
+               fprintf (res, "[%d][%d] = %f\n", i, 2 * j + 1, red_[i][j]);
+           }
+        }               /* for i */
     }
-
     return 0;
 }
 

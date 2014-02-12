@@ -18,18 +18,18 @@ for line in lines:
 print len(ls_time)
 
 mat = np.asarray(ls_time)
-x = np.array_split(mat, 25)
+x = np.array_split(mat, 30)
 x = np.asmatrix(x)
 print x.shape
-print x
+#print x
 
-m1 = x[0:5].T
-m2 = x[5:10].T
-m3 = x[10:15].T
-m4 = x[15:20].T
-m5 = x[20:25].T
+m1 = x[0:6].T
+m2 = x[6:12].T
+m3 = x[12:18].T
+m4 = x[18:24].T
+m5 = x[24:30].T
 
 res = np.vstack((m1,m2,m3,m4,m5))
-print res
+#print res
 
 np.savetxt(filename+'.csv',res, delimiter=',', fmt="%s")

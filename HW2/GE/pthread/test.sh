@@ -1,7 +1,7 @@
 #!/bin/bash
 
 input_mat_dir="./mat_in"
-num_thread_ls=(1 2 4 8 16)
+num_thread_ls=(1 2 4 8 16 24)
 
 for entry in "$input_mat_dir"/*
 do 

@@ -287,7 +287,6 @@ void *computeGauss_col_version(void *arg)
     for (i = 0; i < nsize; i++) {
         if(task_id == 1){
             getPivot(nsize,i);
-
             /* Scale the main row. */
             pivotval = matrix[i][i];
             if (pivotval != 1.0) {
@@ -313,7 +312,6 @@ void *computeGauss_col_version(void *arg)
             if(task_id == 1)
                 R[j] -= pivotval * R[i];
         }
-
         barrier(task_num);
     }
 }
@@ -380,16 +378,16 @@ int main(int argc, char *argv[])
 
     for( ii = 0; ii < task_num; ii++){
         set_message(&messages[ii],nsize,ii);
-        pthread_create(&tid[ii], &attr, computeGauss_row_version, &messages[ii]);
+        pthread_create(&tid[ii], &attr, computeGauss_col_version, &messages[ii]);
     }
     
     //wait for all thread to finish
     for( ii = 0; ii < task_num; ii++){
         pthread_join(tid[ii], NULL);
     }
+    
     //end timer
     gettimeofday(&finish, 0);
-
     solveGauss(nsize);
     
     fprintf(stdout, "Time:  %f seconds\n", 
