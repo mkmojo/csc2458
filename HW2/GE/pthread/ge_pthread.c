@@ -285,8 +285,12 @@ void *computeGauss_col_version(void *arg)
     task_id = message->task_id;
     nsize = message->nsize;
     for (i = 0; i < nsize; i++) {
+        begin = set_begin(nsize, i, task_id);
+        end = set_end(nsize, i, task_id);
+
         if(task_id == 1){
             getPivot(nsize,i);
+
             /* Scale the main row. */
             pivotval = matrix[i][i];
             if (pivotval != 1.0) {
@@ -296,16 +300,13 @@ void *computeGauss_col_version(void *arg)
                 }
                 R[i] /= pivotval;
             }
-            barrier(task_num);
         }
-        else
-            barrier(task_num);
 
-       begin = set_begin(nsize, i, task_id);
-       end = set_end(nsize, i, task_id);
+        barrier(task_num);
+
+// printf("Thread id %d, begin %d, end %d\n", task_id, begin, end);
        for (j = i+1; j < nsize; j++) {
             pivotval = matrix[j][i];
-            matrix[j][i] = 0.0;
             for (k = begin; k <= end; k++) {
                 matrix[j][k] -= pivotval * matrix[i][k];
             }
@@ -313,6 +314,8 @@ void *computeGauss_col_version(void *arg)
                 R[j] -= pivotval * R[i];
         }
         barrier(task_num);
+        for(k = begin; k <= end; k++)
+            matrix[k][i] = 0.0;
     }
 }
 /* Solve the equation. */
