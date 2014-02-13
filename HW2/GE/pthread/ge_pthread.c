@@ -26,7 +26,6 @@ struct timeval start, finish;
 double **matrix, *X, *R;
 
 /* Pre-set solution. */
-
 double *X__;
 
 /* Barrier for synchronization */
@@ -48,8 +47,8 @@ void barrier (int expect)
 
     pthread_mutex_unlock (&mut);	//unlock
 }
-/* Initialize the matirx. */
 
+/* Initialize the matrix. */
 int initMatrix(const char *fname)
 {
     FILE *file;
@@ -129,7 +128,6 @@ void initRHS(int nsize)
 }
 
 /* Initialize the results. */
-
 void initResult(int nsize)
 {
     int i;
@@ -142,7 +140,6 @@ void initResult(int nsize)
 }
 
 /* Get the pivot - the element on column with largest absolute value. */
-
 void getPivot(int nsize, int currow)
 {
     int i, pivotrow;
@@ -188,7 +185,7 @@ void set_message(thread_arg *message, int nsize, int ii)
 int set_begin(int nsize, int cnt_row, int task_id)
 {
     int i = cnt_row;
-    /* Factorize the rest of the matrix. */
+    
     //rows that need to be dealt with, starting from (i + 1)_th. 
     //because i_th has been normalized. 
     int total_num_row = nsize-i-1; 
@@ -207,7 +204,7 @@ int set_begin(int nsize, int cnt_row, int task_id)
 int set_end(int nsize, int cnt_row, int task_id)
 {
     int i = cnt_row;
-    /* Factorize the rest of the matrix. */
+    
     //rows that need to be dealt with, starting from (i + 1)_th. 
     //because i_th has been normalized. 
     int total_num_row = nsize-i-1; 
@@ -228,7 +225,6 @@ int set_end(int nsize, int cnt_row, int task_id)
 
 /* For all the rows, get the pivot and eliminate all rows and columns
  * for that particular pivot row. */
-
 void *computeGauss_row_version(void *arg)
 {
     thread_arg *message = (thread_arg *) arg;
@@ -258,6 +254,7 @@ void *computeGauss_row_version(void *arg)
             barrier(task_num);
 
 
+        /* Row partition */
        begin = set_begin(nsize, i, task_id);
        end = set_end(nsize, i, task_id);
        for (j = begin; j <= end; j++) {
@@ -318,8 +315,8 @@ void *computeGauss_col_version(void *arg)
             matrix[k][i] = 0.0;
     }
 }
-/* Solve the equation. */
 
+/* Solve the equation. */
 void solveGauss(int nsize)
 {
     int i, j;

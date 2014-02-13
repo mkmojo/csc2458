@@ -1,0 +1,13 @@
+Files that matters:
+    // This is the source code file
+    ./GE/pthread/ge_pthread.c
+
+    // Report for this homework
+    // report.pdf is not generates from the report.tex file
+    ./report/report.pdf 
+
+How to use the ge_pthread.c file
+    ./ge_pthread <input matrix path> -p 4
+    
+
+
