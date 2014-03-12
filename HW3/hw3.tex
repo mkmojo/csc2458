@@ -1,0 +1,262 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Structured General Purpose Assignment
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing assignment content.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%-------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%-------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage{graphicx} % Required to insert images
+\usepackage{mathtools} % Required to use \text 
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in 
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center header
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%-------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%-------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+   
+%-------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%-------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Assignment\ \#3} % Assignment title
+\newcommand{\hmwkDueDate}{Tue,\ Feb\ 25,\ 2014} % Due date
+\newcommand{\hmwkClass}{CSC\ 458} % Course/class
+\newcommand{\hmwkClassTime}{15:25am} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{Kai Shen} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{Qiyuan Qiu} % Your name
+
+%-------------------------------------------------------------------------------------
+%	TITLE PAGE
+%-------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%-------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%-------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%-------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\newpage
+\tableofcontents
+\newpage
+
+%-------------------------------------------------------------------------------------
+%	PROBLEM 1
+%-------------------------------------------------------------------------------------
+
+% To have just one problem per page, simply put a \clearpage after each problem
+
+\begin{homeworkProblem}[Problem 1]
+
+Write-After-Read case:  \\
+\begin{center}
+add r2, r1, 4  \\
+load r1, memaddr \\
+\end{center}
+Here the r1 location is read in the first instruction and later written in the second instruction. 
+
+If we map the first r1 to R3, and the second r1 to R4, the code will be turned into \\
+\begin{center}
+add r2, R3, 4  \\
+load R4, memaddr  \\
+\end{center}
+Now these two instructions can be issued simultaneously because they are now independent of each other. 
+
+Write-After-Write case:
+\begin{center}
+write r2, memaddr1 \\
+write r2, memaddr2 \\
+\end{center}
+Here both instructions write to memory location r2. If we map the first r2 to R3 and the second r2 to R4, we get the following code. 
+\begin{center}
+write R3, memaddr1 \\
+write R4, memaddr2 \\
+\end{center}
+Now these two instructions are independent to each other. 
+\end{homeworkProblem}
+
+%-------------------------------------------------------------------------------------
+%	PROBLEM 2
+%-------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}[Problem 2] % Custom section title
+
+%--------------------------------------------
+
+    Assume that when we talk about cache coherence protocol, the protocol is used for a SMP. SMP means that there are multiple processors; each processor has its own private cache; all processors share a main memory by sharing the same bus. \\
+
+    Update here means that the cache policy is write through. When a processor writes a value to its cache, the write is propagated to main memory so that any other processor is aware of this change. \\
+
+    Invalidation here means that the cache policy is write back. When a processor writes a value to its cache, this change is not right away written to the shared main memory. Rather the change is written the shared main memory when the cache is replaced.\\
+
+    The \textbf{advantage} for updating is that it is easier to implement. \\
+    
+    The \textbf{disadvantage} of updating is that because every cache write goes to bus, the bandwidth requirement for bus will be high, which limits the number of overall processors working on the same chip.
+
+\end{homeworkProblem}
+
+%-------------------------------------------------------------------------------------
+%	PROBLEM 3
+%-------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}[Problem 3 ] % Roman numerals
+        No. In the following scenario, both processors will run in critical section. 
+        Assume the caches are write back caches. \\
+
+        Initially, both P1 and P2 have flag1 = 0 and flag2 = 0 in their own private cache. \\
+        
+        Now lets focus on P1. P1 write flag1 = 1, turn = 2. But because of write back cache property, both of these write do not propagate to main memory. In P2's private cache , flag1 has the stale value 0. \\
+        
+        Similarly, the write P2 performs does not update the value of flag2 in P1's private cache either.  \\
+        
+        As the result, when the while in P1 checks the value of flag2 it sees that flag2 in its cache is still 0 so it goes into the critical section. When the while in P2 checks the value of flag1 it has a hit in its cache and believes that flag1 is 0 and goes into the critical section.\\
+        
+        Hence, the above program does not guarantee mutually exclusive executions of the critical section.
+\end{homeworkProblem}
+
+%-------------------------------------------------------------------------------------
+%	PROBLEM 4
+%-------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}[Problem 4] % Roman numerals
+    Sequential memory consistency(SC) subsumes coherence. Coherence model requires the write order to same memory location shows up the same to all processors. SC is an stronger assumption in a sense that it requires all the write, even to different memory locations, appears to all other processors in a consensus order. SC also ensures the individual program order for each processor. \\
+
+    As for this particular problem. There is only one possible output for P3, which is 1.(Or do not execute print(A))\\
+
+    The reason being that, due to sequential memory consistency, B is set to 1 if and only if the value of A has been set to 1. Hence P3 either does not output anything or it printout 1.
+\end{homeworkProblem}
+
+%-------------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------------
+%	PROBLEM 5
+%-------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}[Problem 5] % Roman numerals
+    \begin{homeworkSection}{\homeworkProblemName:~(a)}
+    Because the test\_and\_set is a write and due to the property of sequential memory consistency, all test\_and\_set from all processors are ordered. In that order the next test\_and\_set cannot be issued until the current one finished. Therefore ensures mutual exclusive access to critical section.
+    \end{homeworkSection}
+
+    \begin{homeworkSection}{\homeworkProblemName:~(b)}
+        He is right. \\
+        If some processor runs within the first while means that it is the only one owns the critical section. The test\_and\_set instruction already takes care of setting the value of location to locked.
+    \end{homeworkSection}
+
+    \begin{homeworkSection}{\homeworkProblemName:~(c)}
+        He is right. \\
+        Assuming a shared memory model. Each processor has its own private cache. The test\_and\_set is a read-modify-write instruction. That means every time it is used, the memory coherence protocol have to notify all other processors to make sure the order of all write operation appears all the same to them.  \\
+        The second while loop is just a read. This can easily have a hit in the processors private cache, which lead to much better performance.
+    \end{homeworkSection}
+\end{homeworkProblem}
+
+%-------------------------------------------------------------------------------------
+%	PROBLEM 6
+%-------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}[Problem 6] % Roman numerals
+    \begin{verbatim}
+        def test_and_set:
+            if( compare_and_swap(location,locked, locked) == 1):
+                return locked
+            else:
+                return unlocked
+    \end{verbatim}
+\end{homeworkProblem}
+
+%-------------------------------------------------------------------------------------
+
+\end{document}
